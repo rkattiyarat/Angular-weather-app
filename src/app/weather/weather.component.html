@@ -5,13 +5,13 @@
 
     <div class="row align-items-center">
     <form >
-        <input type="text" name="cityName" placeholder="Enter a city name..." [(ngModel)]="city">
+        <input type="text" name="cityName" placeholder="Enter a city name..." [(ngModel)]="city" (keydown.enter)="getWeather()">
         <button type="button" (click)="getWeather()">Get Weather</button>
     </form>
 
     <div *ngIf="weatherData">
         <h2>{{ weatherData.name }}</h2>
-        <p>Temperature: {{weatherData.main.temp}}</p>
+        <p>Temperature: {{weatherData.main.temp}} °C</p>
         <p>Humidity: {{weatherData.main.humidity}}</p>
         <p>Pressure: {{weatherData.main.pressure}}</p>
         <p>Wind Speed: {{weatherData.wind.speed}}</p>

@@ -14,6 +14,7 @@ export class WeatherService {
    getWeather(city: string) {
     // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.apiKey}`;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${this.apiKey}`;
+    // clear the input field
     return this.http.get(url);
   }
 }

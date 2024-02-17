@@ -15,6 +15,8 @@ export class WeatherComponent {
 
   getWeather() {
     this.weatherService.getWeather(this.city).subscribe(data => {this.weatherData = data; console.log(data);});
+    // clear the input field
+    this.city = '';
   }
 
 }
