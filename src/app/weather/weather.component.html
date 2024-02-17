@@ -5,7 +5,7 @@
 
     <div class="row align-items-center">
     <form >
-        <input type="text" name="cityName" placeholder="Enter a city name..." [(ngModel)]="city" (keydown.enter)="getWeather()">
+        <input type="text" name="cityName" [placeholder]="isEmty ? 'Please enter a city name' : 'City name...'" [(ngModel)]="city" (keydown.enter)="getWeather()" [ngClass]="{'empty-field':isEmty}">
         <button type="button" (click)="getWeather()">Get Weather</button>
     </form>
 
