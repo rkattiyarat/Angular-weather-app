@@ -5,8 +5,16 @@
 
 .full-window {
     height: 100vh;
-    background-image: url('/src/background-gradient-lights.jpg');
-    background-size: cover; /* Adjusts the background image size to cover the entire container */
-    background-position: center; /* Centers the background image */
+}
+
+p {
+    font-size: 2em;
+}
+
+h1 {
+    font-size: 3em;
+}
+h2 {
+    font-size: 2.5em;
 }
 

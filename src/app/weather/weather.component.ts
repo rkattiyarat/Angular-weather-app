@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WeatherService } from '../weather.service';
 
+
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
@@ -34,4 +35,11 @@ export class WeatherComponent {
     this.city = '';
   }
 }
+
+onReset() {
+  this.city = '';
+  this.weatherData = null;
+  this.roundTemp = 0;
+  this.iconUrl = 'http://openweathermap.org/img/wn/';
+  }
 }
