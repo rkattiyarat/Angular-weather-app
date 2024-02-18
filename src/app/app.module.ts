@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { FormsModule } from '@angular/forms';
     WeatherComponent
   ],
   imports: [
-    BrowserModule,BrowserModule, HttpClientModule, FormsModule
+    BrowserModule,BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

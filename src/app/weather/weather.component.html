@@ -1,21 +1,26 @@
-<div class="container-fluid">
-    <div class="row align-items-center">
-        <h1 style="text-align: center; margin: 50px auto 0;">Check Weather</h1>
+ <div class="container-fluid full-window" style="background-image: url('/src/background-gradient-lights.jpg')">
+    <div class="row align-items-center justify-content-center">
+        <h1 style="text-align: center;">Check Weather</h1>
     </div>
 
-    <div class="row align-items-center">
-    <form >
-        <input type="text" name="cityName" [placeholder]="isEmty ? 'Please enter a city name' : 'City name...'" [(ngModel)]="city" (keydown.enter)="getWeather()" [ngClass]="{'empty-field':isEmty}">
-        <button type="button" (click)="getWeather()">Get Weather</button>
-    </form>
-
-    <div *ngIf="weatherData">
-        <h2>{{ weatherData.name }}</h2>
-        <p>Temperature: {{weatherData.main.temp}} °C</p>
-        <p>Humidity: {{weatherData.main.humidity}}</p>
-        <p>Pressure: {{weatherData.main.pressure}}</p>
-        <p>Wind Speed: {{weatherData.wind.speed}}</p>
-        <p>Weather: {{weatherData.weather[0].description}}</p>
+    <div class="row align-items-center justify-content-center mt-5">
+        <form class="col-md-6">
+            <div class="input-group">
+                <input type="text" name="cityName" [placeholder]="isEmty ? 'Please enter a city name' : 'City name...'" [(ngModel)]="city" (keydown.enter)="getWeather()" [ngClass]="{'empty-field': isEmty}" class="form-control">
+                <button type="button" class="btn btn-primary" (click)="getWeather()">Get Weather</button>
+            </div>
+        </form>
     </div>
-    </div>               
+
+    <div class="row align-items-center justify-content-center mt-5">
+        <div class="col-md-3 align-items-center" *ngIf="weatherData">
+            <h2>{{ weatherData.name }}</h2>
+            <p>Temperature: {{ roundTemp }} °C</p>
+            <p>Humidity: {{ weatherData.main.humidity }}</p>
+            <p>Pressure: {{ weatherData.main.pressure }}</p>
+            <p>Wind Speed: {{ weatherData.wind.speed }}</p>
+            <p>Weather: {{ weatherData.weather[0].description }}</p>
+            <img src="http://openweathermap.org/img/wn/{{ weatherData.weather[0].icon }}.png" alt="weather icon" style="width: 100px; height: 100px;">
+        </div>
+    </div>
 </div>

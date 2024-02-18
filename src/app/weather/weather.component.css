@@ -3,3 +3,10 @@
     border-style: solid;
 }
 
+.full-window {
+    height: 100vh;
+    background-image: url('/src/background-gradient-lights.jpg');
+    background-size: cover; /* Adjusts the background image size to cover the entire container */
+    background-position: center; /* Centers the background image */
+}
+
