@@ -13,7 +13,7 @@ export class WeatherComponent {
   isEmty: boolean = false;
   roundTemp: number = 0;
   iconUrl: string = 'http://openweathermap.org/img/wn/';
-  temperatureUnit: string = 'Celsius';
+  temperatureUnit: string = '';
   fahrenheit: number = 0;
   constructor(private weatherService:WeatherService) { }
 
@@ -21,12 +21,14 @@ export class WeatherComponent {
   }
 
   toggleTemperatureUnit() {
-    if (this.temperatureUnit === 'Celsius') {
+    if (this.temperatureUnit != '') {
       this.getWeatherInFahrenheit();
       this.temperatureUnit = 'Fahrenheit';
+      console.log(this.temperatureUnit);
     } else {
       this.getWeather();
-      this.temperatureUnit = 'Celsius'; 
+      this.temperatureUnit = 'Celsius';
+      console.log(this.temperatureUnit);
     }
   }
 
