@@ -14,9 +14,11 @@ export class WeatherComponent {
   roundTemp: number = 0;
   iconUrl: string = 'http://openweathermap.org/img/wn/';
   temperatureUnit: string = 'Celsius';
+  fahrenheit: number = 0;
   constructor(private weatherService:WeatherService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   toggleTemperatureUnit() {
     if (this.temperatureUnit === 'Celsius') {
@@ -57,7 +59,7 @@ getWeatherInFahrenheit() {
   if(!this.isEmty) {
     this.weatherService.getWeather(this.city).subscribe(data => {
       this.weatherData = data;
-      this.roundTemp = Math.round((this.weatherData.main.temp * 9/5) + 32);
+      this.fahrenheit = Math.round((this.weatherData.main.temp * 9/5) + 32);
       this.iconUrl = this.iconUrl + this.weatherData.weather[0].icon + '.png';
       console.log(data);
     });

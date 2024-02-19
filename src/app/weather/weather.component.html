@@ -13,8 +13,8 @@
                 <button type="button" class="btn btn-outline-dark" (click)="onReset()">Reset</button>
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" (click)="getWeather()">Celsius</a></li>
-                    <li><a class="dropdown-item" (click)="getWeatherInFahrenheit()">Fahrenheit</a></li>
+                    <li><a class="dropdown-item" (click)="toggleTemperatureUnit()">Celsius</a></li>
+                    <li><a class="dropdown-item" (click)="toggleTemperatureUnit()">Fahrenheit</a></li>
                 </ul>
             </div>
         </form>
@@ -23,7 +23,7 @@
     <div class="row align-items-center justify-content-center mt-5">
         <div class="col-md-3 align-items-center" *ngIf="weatherData">
             <h2>{{ weatherData.name }}</h2>
-            <p>Temperature: {{ temperatureUnit === 'Celsius' ? roundTemp + ' °' : farenheit + ' °' }}</p>
+            <p>Temperature: {{ temperatureUnit === 'Celsius' ? roundTemp + ' C°' : farenheit + ' F°' }}</p>
             <p>Humidity: {{ weatherData.main.humidity }}</p>
             <p>Pressure: {{ weatherData.main.pressure }}</p>
             <p>Wind Speed: {{ weatherData.wind.speed }}</p>
