@@ -13,70 +13,50 @@ export class WeatherComponent {
   isEmty: boolean = false;
   roundTemp: number = 0;
   iconUrl: string = 'http://openweathermap.org/img/wn/';
-  temperatureUnit: string = '';
   fahrenheit: number = 0;
+  temperatureUnit: string = 'Celsius' || 'Fahrenheit';
+
   constructor(private weatherService:WeatherService) { }
 
   ngOnInit() {
   }
 
-  toggleTemperatureUnit() {
-    if (this.temperatureUnit != '') {
-      this.getWeatherInFahrenheit();
-      this.temperatureUnit = 'Fahrenheit';
-      console.log(this.temperatureUnit);
-    } else {
-      this.getWeather();
-      this.temperatureUnit = 'Celsius';
-      console.log(this.temperatureUnit);
+  getWeatherInCelcius() {
+    this.getWeatherData();
+  }
+
+  getWeatherInFahrenheit() {
+    this.getWeatherData(true);
+  }
+
+  private getWeatherData(convertToFahrenheit: boolean = false) {
+    if (this.city === '') {
+      this.isEmty = true;
+      return;
     }
-  }
-
-  getWeather() {
-  if(this.city === '') {
-    this.isEmty = true;
-      // color the input field red
-  } else {
+    
     this.isEmty = false;
-  }
-  if(!this.isEmty) {
+  
     this.weatherService.getWeather(this.city).subscribe(data => {
       this.weatherData = data;
-      this.roundTemp = Math.round(this.weatherData.main.temp); 
+      if (convertToFahrenheit) {
+        this.temperatureUnit = 'Fahrenheit';
+        this.fahrenheit = Math.round((this.weatherData.main.temp * 9/5) + 32);
+        console.log('F: '+this.fahrenheit);
+      } else {
+        this.temperatureUnit = 'Celsius';
+        this.roundTemp = Math.round(this.weatherData.main.temp); 
+      }
       this.iconUrl = this.iconUrl + this.weatherData.weather[0].icon + '.png';
       console.log(data);
     });
-    // clear the input field
+  
+    // Clear the input field
     this.city = '';
   }
-}
-
-getWeatherInFahrenheit() {
-  if(this.city === '') {
-    this.isEmty = true;
-      // color the input field red
-  } else {
-    this.isEmty = false;
-  }
-  if(!this.isEmty) {
-    this.weatherService.getWeather(this.city).subscribe(data => {
-      this.weatherData = data;
-      this.fahrenheit = Math.round((this.weatherData.main.temp * 9/5) + 32);
-      this.iconUrl = this.iconUrl + this.weatherData.weather[0].icon + '.png';
-      console.log(data);
-    });
-    // clear the input field
-    this.city = '';
-  }
-
-}
 
 onReset() {
-  this.city = '';
-  this.weatherData = null;
-  this.roundTemp = 0;
-  this.iconUrl = 'http://openweathermap.org/img/wn/';
+// reload the page
+window.location.reload();
   }
-
-
 }
