@@ -3,10 +3,6 @@
     border-style: solid;
 }
 
-.full-window {
-    height: 100vh;
-}
-
 p {
     font-size: 2em;
     font-weight: 900;
@@ -30,5 +26,12 @@ input {
 button {
     font-size: 1.5em;
     font-weight: 900;
+}
+
+.bg-image {
+    background-image: url('../../assets/background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 }
 
