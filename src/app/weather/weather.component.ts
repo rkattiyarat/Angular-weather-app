@@ -56,7 +56,14 @@ export class WeatherComponent {
   }
 
 onReset() {
-// reload the page
-window.location.reload();
+  this.city = '';
+  // Reset weather data
+  this.weatherData = null;
+  this.roundTemp = 0;
+  this.fahrenheit = 0;
+  this.temperatureUnit = 'Celsius';
+
+  // Optionally, scroll to the top of the page
+  window.scrollTo(0, 0);
   }
 }
