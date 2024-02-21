@@ -29,7 +29,7 @@ button {
 }
 
 .bg-image {
-    background-image: url('../../assets/background.jpg');
+    background-image: url('../../assets/sky.jpg');
     background-size: cover;
     background-position: center;
     height: 100vh;

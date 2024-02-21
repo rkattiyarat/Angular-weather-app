@@ -63,7 +63,7 @@ onReset() {
   this.fahrenheit = 0;
   this.temperatureUnit = 'Celsius';
 
-  // Optionally, scroll to the top of the page
+  //scroll to the top of the page
   window.scrollTo(0, 0);
   }
 }
