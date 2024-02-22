@@ -30,38 +30,73 @@ export class WeatherComponent {
     this.getWeatherData(true);
   }
 
+//   private getWeatherData(convertToFahrenheit: boolean = false) {
+//     if (this.city === undefined || this.city === null || this.city.trim() === '') {
+//       this.isEmty = true;
+//       let error = document.getElementById('error');
+//       if (error){
+//         error.innerHTML = 'Please enter a valid city';
+//       }
+//       return;
+//     }
+
+//     this.isEmty = false;
+  
+//     this.weatherService.getWeather(this.city).subscribe(
+//       (data: WeatherData) => {
+//         if (data && data.name) {
+//           this.weatherData = data;
+//           if (convertToFahrenheit) {
+//             this.temperatureUnit = 'Fahrenheit';
+//             this.fahrenheit = Math.round((this.weatherData.main.temp * 9/5) + 32);
+//           } else {
+//             this.temperatureUnit = 'Celsius';
+//             this.roundTemp = Math.round(this.weatherData.main.temp); 
+//           }
+//           this.iconUrl = this.iconUrl + this.weatherData.weather[0].icon + '.png';
+//         }
+//       },
+//       (error) => {
+//         console.error('Error fetching weather data:', error);
+//       }
+//     );
+  
+//     // Clear the input field
+//     this.city = '';
+// }
+
   private getWeatherData(convertToFahrenheit: boolean = false) {
     if (this.city === undefined || this.city === null || this.city.trim() === '') {
       this.isEmty = true;
       let error = document.getElementById('error');
       if (error){
         error.innerHTML = 'Please enter a valid city';
+        error.style.color = 'red';
       }
       return;
     }
-
-    
     this.isEmty = false;
-  
-    this.weatherService.getWeather(this.city).subscribe(data => {
-      console.log(data);
+    this.weatherService.getWeather(this.city).subscribe(
+      (data: Weatherdata) => {
+      if (data && data.name){
       this.weatherData = data;
-      //console.log('weatherData: '+this.weatherData);
-   
-      
-      if (convertToFahrenheit) {
-        this.temperatureUnit = 'Fahrenheit';
-        this.fahrenheit = Math.round((this.weatherData.main.temp * 9/5) + 32);
-      } else {
-        this.temperatureUnit = 'Celsius';
-        this.roundTemp = Math.round(this.weatherData.main.temp); 
+        if (convertToFahrenheit) {
+          this.temperatureUnit = 'Fahrenheit';
+          this.fahrenheit = Math.round((this.weatherData.main.temp * 9/5) + 32);
+        } else {
+          this.temperatureUnit = 'Celsius';
+          this.roundTemp = Math.round(this.weatherData.main.temp); 
+        }
+      this.iconUrl = this.iconUrl + this.weatherData.weather[0].icon + '.png'; 
       }
-      this.iconUrl = this.iconUrl + this.weatherData.weather[0].icon + '.png';
-      // console.log(data);
+    (error) => {
+      console.error('Error fetching weather data:', error);
+      }
     });
     // Clear the input field
     this.city = '';
   }
+
 
 onReset() {
   this.city = '';
