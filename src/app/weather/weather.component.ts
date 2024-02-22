@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { WeatherService } from '../weather.service';
+import { Weatherdata } from '../weatherdata';
 
 
 @Component({
@@ -30,34 +31,36 @@ export class WeatherComponent {
   }
 
   private getWeatherData(convertToFahrenheit: boolean = false) {
-    if (this.city === undefined || this.city === null || this.city === '') {
+    if (this.city === undefined || this.city === null || this.city.trim() === '') {
       this.isEmty = true;
       let error = document.getElementById('error');
-      error.innerHTML = 'Please enter valid a city';
+      if (error){
+        error.innerHTML = 'Please enter a valid city';
+      }
       return;
     }
-    else{
-      this.isEmty = false;
+
+    
+    this.isEmty = false;
   
     this.weatherService.getWeather(this.city).subscribe(data => {
+      console.log(data);
       this.weatherData = data;
+      //console.log('weatherData: '+this.weatherData);
+   
+      
       if (convertToFahrenheit) {
         this.temperatureUnit = 'Fahrenheit';
         this.fahrenheit = Math.round((this.weatherData.main.temp * 9/5) + 32);
-        console.log('F: '+this.fahrenheit);
       } else {
         this.temperatureUnit = 'Celsius';
         this.roundTemp = Math.round(this.weatherData.main.temp); 
       }
       this.iconUrl = this.iconUrl + this.weatherData.weather[0].icon + '.png';
-      console.log(data);
+      // console.log(data);
     });
-  
     // Clear the input field
     this.city = '';
-    }
-    
-    
   }
 
 onReset() {
