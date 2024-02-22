@@ -30,12 +30,14 @@ export class WeatherComponent {
   }
 
   private getWeatherData(convertToFahrenheit: boolean = false) {
-    if (this.city === '') {
+    if (this.city === undefined || this.city === null || this.city === '') {
       this.isEmty = true;
+      let error = document.getElementById('error');
+      error.innerHTML = 'Please enter valid a city';
       return;
     }
-    
-    this.isEmty = false;
+    else{
+      this.isEmty = false;
   
     this.weatherService.getWeather(this.city).subscribe(data => {
       this.weatherData = data;
@@ -53,6 +55,9 @@ export class WeatherComponent {
   
     // Clear the input field
     this.city = '';
+    }
+    
+    
   }
 
 onReset() {
@@ -62,7 +67,12 @@ onReset() {
   this.roundTemp = 0;
   this.fahrenheit = 0;
   this.temperatureUnit = 'Celsius';
-
+  const errorElement = document.getElementById('error');
+  const emptyBorder = document.getElementById('input-user');
+  if (errorElement) {
+    errorElement.innerHTML = '';
+    emptyBorder.style.border = 'none';
+  }
   //scroll to the top of the page
   window.scrollTo(0, 0);
   }

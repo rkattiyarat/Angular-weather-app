@@ -1,6 +1,7 @@
 .empty-field {
-    border-color: red;
+    border-color: red; 
     border-style: solid;
+    border-width: 3px;
 }
 
 p {
@@ -34,4 +35,14 @@ button {
     background-position: center;
     height: 100vh;
 }
+
+#error {
+    color: red;
+    font-size: 1.5em;
+    font-weight: 900;
+    position: absolute;
+    bottom: -50px; 
+    left: 0;
+}
+
 

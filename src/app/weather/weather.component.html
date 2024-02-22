@@ -7,8 +7,9 @@
     <div class="row align-items-center justify-content-center mt-5">
         <form class="col-md-6">
             <div class="input-group">
-                <input type="text" name="cityName" [placeholder]="isEmty ? 'Please enter a city name' : 'City name...'" 
-                [(ngModel)]="city" (keydown.enter)="getWeatherInCelcius()" [ngClass]="{'empty-field': isEmty}" class="form-control">
+                <input type="text" name="cityName" placeholder='City name...'
+                [(ngModel)]="city" (keydown.enter)="getWeatherInCelcius()" [ngClass]="{'empty-field': isEmty}" class="form-control" id="input-user">
+                <p id="error"></p>
 
                 <button type="button" class="btn btn-outline-dark dropdown-toggle" id="dropdownMenuButton" 
                 data-bs-toggle="dropdown" aria-expanded="false" >Get Weather</button>
