@@ -16,10 +16,32 @@ export class WeatherComponent {
   iconUrl: string = 'http://openweathermap.org/img/wn/';
   fahrenheit: number = 0;
   temperatureUnit: string = 'Celsius' || 'Fahrenheit';
+  suggestedCities: any[] = [];
 
   constructor(private weatherService:WeatherService) { }
 
   ngOnInit() {
+  }
+
+  onCityInput(event: any) {
+    const query = event.target.value;
+    if (query.trim() === '') {
+      this.suggestedCities = [];
+      return;
+    }
+    this.weatherService.getSuggestedCities(query).subscribe(
+      (data: any) => {
+        this.suggestedCities = data.list;
+      },
+      (error) => {
+        console.error('Error fetching suggested cities:', error);
+      }
+    );
+  }
+
+  onSelectCity(city: string) {
+    this.city = city;
+    this.suggestedCities = []; // Clear the suggestions when a city is selected
   }
 
   getWeatherInCelcius() {
