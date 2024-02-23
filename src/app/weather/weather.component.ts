@@ -33,11 +33,6 @@ export class WeatherComponent {
   private getWeatherData(convertToFahrenheit: boolean = false) {
     if (this.city === undefined || this.city === null || this.city.trim() === '') {
       this.isEmty = true;
-      let error = document.getElementById('error');
-      if (error){
-        error.innerHTML = 'Please enter a valid city';
-        error.style.color = 'red';
-      }
       return;
     }
     this.isEmty = false;
@@ -62,23 +57,7 @@ export class WeatherComponent {
     this.city = '';
   }
 
-
 onReset() {
   window.location.reload();
 }
-  // this.city = '';
-  // // Reset weather data
-  // this.weatherData = null;
-  // this.roundTemp = 0;
-  // this.fahrenheit = 0;
-  // this.temperatureUnit = 'Celsius';
-  // const errorElement = document.getElementById('error');
-  // const emptyBorder = document.getElementById('input-user');
-  // if (errorElement) {
-  //   errorElement.innerHTML = '';
-  //   emptyBorder.style.border = 'none';
-  // }
-  // //scroll to the top of the page
-  // window.scrollTo(0, 0);
-  // }
 }

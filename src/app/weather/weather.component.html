@@ -9,7 +9,7 @@
             <div class="input-group">
                 <input type="text" name="cityName" placeholder='City name...'
                 [(ngModel)]="city" (keydown.enter)="getWeatherInCelcius()" [ngClass]="{'empty-field': isEmty}" class="form-control" id="input-user">
-                <p id="error"></p>
+                <p id="error" *ngIf="isEmty">Please enter a valid city</p>
 
                 <button type="button" class="btn btn-outline-dark dropdown-toggle" id="dropdownMenuButton" 
                 data-bs-toggle="dropdown" aria-expanded="false" >Get Weather</button>
