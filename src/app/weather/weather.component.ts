@@ -7,7 +7,7 @@ import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
-  styleUrl: './weather.component.css'
+  styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit{
   city: string ='';
@@ -18,19 +18,18 @@ export class WeatherComponent implements OnInit{
   fahrenheit: number = 0;
   temperatureUnit: string = 'Celsius' || 'Fahrenheit';
   cityList: Weatherdata[] = [];
-  searchForm = this.fb.nonNullable.group({
+  searchForm = this.fb.group({
     city:'',
   });
 
   constructor(private weatherService:WeatherService, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.fetchData();
   }
 
   fetchData(){
     this.weatherService.getSuggestedCities(this.city).subscribe( cities => {
-      this.cityList = cities;
+    this.cityList = cities;
     });
   }
 

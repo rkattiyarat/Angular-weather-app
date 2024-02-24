@@ -1,4 +1,4 @@
-<div class="bg-image">
+<!-- <div class="bg-image">
 <div class="container-fluid">
     <div class="row align-items-center justify-content-center">
         <h1 style="text-align: center;">Check Weather</h1>
@@ -57,4 +57,70 @@
     </div>
     
 </div>
-</div>
+</div> -->
+
+<div class="bg-image">
+    <div class="container-fluid">
+      <div class="row align-items-center justify-content-center">
+        <h1 style="text-align: center;">Check Weather</h1>
+      </div>
+  
+      <div class="row align-items-center justify-content-center mt-5">
+        <form [formGroup]="searchForm" class="col-md-6 searchBar" (ngSubmit)="onSearchSubmit()">
+          <div class="input-group">
+            <input type="text" id="input-user" name="cityName" placeholder="City name..." autocomplete="off"
+              formControlName="city" (keydown.enter)="getWeatherInCelcius()" [ngClass]="{'empty-field': isEmty}"
+              class="form-control searchBarInput">
+            <p id="error" *ngIf="isEmty">Please enter a valid city</p>
+  
+            <button type="button" class="btn btn-outline-dark dropdown-toggle" id="dropdownMenuButton"
+              data-bs-toggle="dropdown" aria-expanded="false">Get Weather</button>
+            <button type="button" class="btn btn-outline-dark" (click)="onReset()">Reset</button>
+  
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" (click)="getWeatherInCelcius()">Celsius</a></li>
+              <li><a class="dropdown-item" (click)="getWeatherInFahrenheit()">Fahrenheit</a></li>
+            </ul>
+          </div>
+        </form>
+      </div>
+  
+      <div class="citiesTable">
+        <div class="article" *ngFor="let c of cityList">
+          {{c.name}}
+        </div>
+      </div>
+      <div class="row align-items-center justify-content-center mt-5">
+        <div class="col-md-4 align-items-center" *ngIf="weatherData">
+          <h2>{{ weatherData.name }}</h2>
+          <img src="http://openweathermap.org/img/wn/{{ weatherData.weather[0].icon }}.png" alt="weather icon"
+            style="width: 100px; height: 100px;">
+          <p><i class="bi bi-thermometer-sun"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-thermometer-sun" viewBox="0 0 16 16">
+              <!-- Temperature SVG -->
+            </svg> Temperature: {{ temperatureUnit === 'Celsius' ? roundTemp + '°C' : fahrenheit + '°F' }}
+          </p>
+          <p><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+              class="bi bi-moisture" viewBox="0 0 16 16">
+              <!-- Humidity SVG -->
+            </svg>
+            <i class="bi bi-moisture"></i> Humidity: {{ weatherData.main.humidity }} %
+          </p>
+          <p><i class="bi bi-wind"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-wind"
+              viewBox="0 0 16 16">
+              <!-- Wind SVG -->
+            </svg> Wind Speed: {{ weatherData.wind.speed }} m/s
+          </p>
+          <p><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+              class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+              <!-- Chat SVG -->
+            </svg><i class="bi bi-chat-dots-fill"></i> Looks like... {{ weatherData.weather[0].description }}
+          </p>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
