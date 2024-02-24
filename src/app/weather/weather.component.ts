@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { Weatherdata } from '../weatherdata';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Weatherdata } from '../weatherdata';
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.css'
 })
-export class WeatherComponent {
+export class WeatherComponent implements OnInit{
   city: string ='';
   weatherData: any;
   isEmty: boolean = false;
@@ -16,32 +17,26 @@ export class WeatherComponent {
   iconUrl: string = 'http://openweathermap.org/img/wn/';
   fahrenheit: number = 0;
   temperatureUnit: string = 'Celsius' || 'Fahrenheit';
-  suggestedCities: any[] = [];
+  cityList: Weatherdata[] = [];
+  searchForm = this.fb.nonNullable.group({
+    city:'',
+  });
 
-  constructor(private weatherService:WeatherService) { }
+  constructor(private weatherService:WeatherService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.fetchData();
   }
 
-  onCityInput(event: any) {
-    const query = event.target.value;
-    if (query.trim() === '') {
-      this.suggestedCities = [];
-      return;
-    }
-    this.weatherService.getSuggestedCities(query).subscribe(
-      (data: any) => {
-        this.suggestedCities = data.list;
-      },
-      (error) => {
-        console.error('Error fetching suggested cities:', error);
-      }
-    );
+  fetchData(){
+    this.weatherService.getSuggestedCities(this.city).subscribe( cities => {
+      this.cityList = cities;
+    });
   }
 
-  onSelectCity(city: string) {
-    this.city = city;
-    this.suggestedCities = []; // Clear the suggestions when a city is selected
+  onSearchSubmit(){
+    this.city = this.searchForm.value.city ?? '';
+    this.fetchData();
   }
 
   getWeatherInCelcius() {
@@ -81,5 +76,5 @@ export class WeatherComponent {
 
 onReset() {
   window.location.reload();
-}
+  }
 }

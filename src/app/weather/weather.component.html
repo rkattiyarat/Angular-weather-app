@@ -5,10 +5,11 @@
     </div>
 
     <div class="row align-items-center justify-content-center mt-5">
-        <form class="col-md-6">
+        <form [formGroup]="searchForm" class="col-md-6 searchBar" (ngSubmit)="onSearchSubmit()">
             <div class="input-group">
-                <input type="text" name="cityName" placeholder='City name...'
-                [(ngModel)]="city" (keydown.enter)="getWeatherInCelcius()" [ngClass]="{'empty-field': isEmty}" class="form-control" id="input-user">
+                <input type="text" id="input-user" name="cityName" placeholder='City name...' autocomplete="off"
+                formControlName="city"
+                [(ngModel)]="city" (keydown.enter)="getWeatherInCelcius()" [ngClass]="{'empty-field': isEmty}" class="form-control searchBarInput">
                 <p id="error" *ngIf="isEmty">Please enter a valid city</p>
 
                 <button type="button" class="btn btn-outline-dark dropdown-toggle" id="dropdownMenuButton" 
@@ -23,8 +24,11 @@
         </form>
     </div>
 
-     
-
+    <div class="citiesTable">
+        <div class="article" *ngFor="let c of cityList">
+        {{c.name}}
+        </div>
+    </div>
     <div class="row align-items-center justify-content-center mt-5">
         <div class="col-md-4 align-items-center" *ngIf="weatherData">
             <h2>{{ weatherData.name }}</h2>
@@ -49,7 +53,6 @@
             <p><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
                 <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
               </svg><i class="bi bi-chat-dots-fill"></i> Looks like... {{ weatherData.weather[0].description }}</p>
-            
         </div>
     </div>
     
