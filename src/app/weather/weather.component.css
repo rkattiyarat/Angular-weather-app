@@ -45,4 +45,11 @@ button {
     left: 0;
 }
 
+#suggestions {
+    color: black;
+    font-size: 0.5em;
+    text-decoration: none;
+    position: relative;
+    margin-left: 350px;
+}
 

@@ -70,8 +70,8 @@ export class WeatherComponent implements OnInit{
         this.searchResult = result;
       })
     }
-
-
+    // reset the search result
+    this.searchResult = undefined;
   }
 
 onReset() {

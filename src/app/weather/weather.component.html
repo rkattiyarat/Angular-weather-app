@@ -21,12 +21,16 @@
                 </ul>
             </div>
         </form>
+    </div>
+
+    <div>
         <ul>
-            <li *ngFor="let c of searchResult">
-                <a>{{c.name + " " + c.country}}</a>
-            </li>
+          <p *ngFor="let c of searchResult">
+            <a class="col-md-4" id="suggestions">{{c.name + " " + c.country}}</a>
+          </p>
         </ul>
     </div>
+ 
 
     <div class="row align-items-center justify-content-center mt-5">
         <div class="col-md-4 align-items-center" *ngIf="weatherData">
