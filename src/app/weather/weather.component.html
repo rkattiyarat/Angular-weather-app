@@ -25,7 +25,7 @@
 
     <div>
         <ul>
-          <p *ngFor="let c of searchResult">
+          <p *ngFor="let c of searchResult" (click)="setSelectedCity(c)">
             <a class="col-md-4" id="suggestions">{{c.name + " " + c.country}}</a>
           </p>
         </ul>

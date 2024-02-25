@@ -74,6 +74,12 @@ export class WeatherComponent implements OnInit{
     this.searchResult = undefined;
   }
 
+  setSelectedCity(selectedCity: Weatherdata) {
+    this.city = selectedCity.name; // Assign the selected city to the input field
+    this.searchResult = undefined; // Clear the search results
+  }
+ 
+
 onReset() {
   window.location.reload();
   }
