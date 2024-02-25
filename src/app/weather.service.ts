@@ -18,8 +18,12 @@ export class WeatherService {
     return this.http.get(url);
   }
 
-  getSuggestedCities(query: string):Observable<Weatherdata[]> {
-    const url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${this.apiKey}`;
-    return this.http.get<Weatherdata[]>(url);
+  // getSuggestedCities(query: string):Observable<Weatherdata[]> {
+  //   const url = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${this.apiKey}`;
+  //   return this.http.get<Weatherdata[]>(url);
+  // }
+
+  searchCities(query: string) {
+    return this.http.get<Weatherdata[]>(`https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${this.apiKey}`);
   }
 }

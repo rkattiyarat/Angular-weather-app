@@ -4,6 +4,7 @@ import { Weatherdata } from '../weatherdata';
 import { FormBuilder } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
@@ -17,26 +18,13 @@ export class WeatherComponent implements OnInit{
   iconUrl: string = 'http://openweathermap.org/img/wn/';
   fahrenheit: number = 0;
   temperatureUnit: string = 'Celsius' || 'Fahrenheit';
-  cityList: Weatherdata[] = [];
-  searchForm = this.fb.group({
-    city:'',
-  });
+  searchResult:undefined | Weatherdata[];
 
   constructor(private weatherService:WeatherService, private fb: FormBuilder) { }
 
   ngOnInit() {
   }
 
-  fetchData(){
-    this.weatherService.getSuggestedCities(this.city).subscribe( cities => {
-    this.cityList = cities;
-    });
-  }
-
-  onSearchSubmit(){
-    this.city = this.searchForm.value.city ?? '';
-    this.fetchData();
-  }
 
   getWeatherInCelcius() {
     this.getWeatherData();
@@ -71,6 +59,19 @@ export class WeatherComponent implements OnInit{
     });
     // Clear the input field
     this.city = '';
+  }
+
+  searchCity(query: KeyboardEvent) {
+    if (query){
+      const element = query.target as HTMLInputElement;
+      console.warn(element.value);
+      this.weatherService.searchCities(element.value).subscribe((result)=>{
+        console.warn(result);
+        this.searchResult = result;
+      })
+    }
+
+
   }
 
 onReset() {
